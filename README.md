@@ -1,66 +1,70 @@
 # Artifact
 
-## Overview
-Welcome to **Artifact**, a Java-based 2D platformer developed to showcase engaging gameplay, dynamic mechanics, and creative level design. This project is built using Java and leverages tools like Git and GitHub for version control and collaboration.
+A Java 2D platformer project with a standard source/resources layout for easier maintenance and IDE import.
 
-## Features
-- **Dynamic Gameplay**: Jump, run, and navigate through challenging levels.
-- **Combat System**: Defeat monsters and powerful bosses.
-- **Customizable Levels**: Easily create and modify levels to extend gameplay.
-- **Responsive Controls**: Smooth and intuitive player movement.
-- **Retro Aesthetics**: Classic pixel art and nostalgic sound effects.
+## Project Structure
 
-## Technologies Used
-- **Java**: Core programming language for the game.
-- **Git**: Version control to track changes and collaborate.
-- **GitHub**: Repository hosting and issue tracking.
-- **Integrated Development Environment (IDE)**: Eclipse/IntelliJ IDEA (or your preferred Java IDE).
-- **Other Libraries**: (Add any third-party libraries or frameworks used).
+```text
+Artifact/
+├── docs/                    # Project documentation and presentation assets
+├── libs/                    # Third-party JAR dependencies
+├── src/
+│   └── main/
+│       ├── java/            # Java source code (packages under com.neet)
+│       └── resources/
+│           ├── audio/
+│           │   ├── music/
+│           │   └── sfx/
+│           ├── images/
+│           │   ├── backgrounds/
+│           │   ├── sprites/
+│           │   └── tilesets/
+│           ├── maps/
+│           └── ui/
+├── .gitignore
+└── README.md
+```
 
-## How to Play
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/KyungUwU/Artifact.git
+## Requirements
 
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd Artifact
-   ```
-3. Open the project in your preferred Java IDE.
-4. Build and run the game to start playing.
+- JDK 8+ (tested with standard `javac`/`java` workflow)
 
-## Game Controls
-- **Move**: →, ←
-- **Attack**: R
-- **Jump**: W
-- **Dash**: F
-- **Objective**: Defeat all the enemies to pass the level.
+## Run (CLI)
 
-## Development Setup
-1. Ensure you have Java JDK (version X or later) installed.
-2. Install Git and set up GitHub for version control.
-3. Import the project into your Java IDE.
+From the repository root:
 
-## Contribution Guidelines
-Contributions are welcome! Follow these steps to contribute:
-1. Fork the repository on GitHub.
-2. Create a feature branch:
-   ```bash
-   git checkout -b feature-name
-   ```
-3. Commit your changes:
-   ```bash
-   git commit -m "Description of changes"
-   ```
-4. Push your branch:
-   ```bash
-   git push origin feature-name
-   ```
-5. Create a pull request on GitHub.
+```bash
+mkdir -p out
+javac -cp "libs/*" -d out $(find src/main/java -name "*.java")
+cp -R src/main/resources/* out/
+java -cp "out:libs/*" com.neet.Main.Game
+```
 
+> On Windows PowerShell/CMD, use `;` instead of `:` in the `java -cp` command.
 
-## Contact
-For questions or suggestions, reach out:
-- **Email**: hnan.ityu@gmail.com
-- **GitHub**: [KyungUwU](https://github.com/KyungUwU)
+## Run (IDE)
+
+1. Open/import this folder as a Java project.
+2. Mark `src/main/java` as Sources Root.
+3. Mark `src/main/resources` as Resources Root (or ensure resources are on classpath).
+4. Add all JARs in `libs/` to the project classpath.
+5. Run `com.neet.Main.Game`.
+
+## Controls
+
+- Move: Left / Right arrows
+- Jump: `W`
+- Attack: `R`
+- Dash: `F`
+
+## Notes
+
+- Resource paths in code were updated to match `src/main/resources`.
+- Existing Java packages remain `com.neet.*` to keep refactor low-risk.
+- Suggested future package cleanup (optional):
+  - `game.core`
+  - `game.entity`
+  - `game.level`
+  - `game.ui`
+  - `game.audio`
+  - `game.utils`
